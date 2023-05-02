@@ -6,4 +6,31 @@ export class Account {
     id:number
 
     @Column()
+    yearIntake:number
+
+    @Column()
+    cgpa:number;
+
+    @Column()
+    DuesClear:boolean;
+
+    @Column()
+    firstName:string
+
+    @Column()
+    lastName:string
+
+    @Column()
+    emailId:string
+
+    @Column()
+    dob:Date
+
+    @Column()
+    password:string
+
+    @Column()
+    phoneNumber:string
+
+
 }
