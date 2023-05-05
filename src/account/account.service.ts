@@ -4,6 +4,7 @@ import { UpdateAccountDto } from './dto/update-account.dto';
 import { Account } from './entities/account.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AccountService {
@@ -12,8 +13,13 @@ export class AccountService {
     private readonly accountRepository : Repository<Account>,
   ) {}
 
-  create(createAccountDto: CreateAccountDto) {
-    return this.accountRepository.create(createAccountDto);
+  async create(createAccountDto: CreateAccountDto) {
+    
+    const salt = await bcrypt.genSalt();
+    const newPassword = await bcrypt.hash(createAccountDto.password, salt);
+    createAccountDto.password = newPassword;
+    const _account = this.accountRepository.create(createAccountDto);
+    return this.accountRepository.save(_account);
   }
 
   findAll() {

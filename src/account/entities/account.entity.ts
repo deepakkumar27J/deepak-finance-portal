@@ -1,18 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Invoice } from "src/invoice/entities/invoice.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Account {
     @PrimaryGeneratedColumn()
     id:number
-
-    @Column()
-    yearIntake:number
-
-    @Column()
-    cgpa:number;
-
-    @Column()
-    DuesClear:boolean;
 
     @Column()
     firstName:string
@@ -24,13 +16,8 @@ export class Account {
     emailId:string
 
     @Column()
-    dob:Date
-
-    @Column()
     password:string
 
-    @Column()
-    phoneNumber:string
-
-
+    @OneToMany(() => Invoice, (invoice) => invoice.account)
+    invocies: Invoice[]
 }

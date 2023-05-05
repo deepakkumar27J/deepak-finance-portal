@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
 import { AccountModule } from './account/account.module';
 import { Account } from './account/entities/account.entity';
+import { InvoiceModule } from './invoice/invoice.module';
+import { Invoice } from './invoice/entities/invoice.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -12,9 +14,9 @@ import { Account } from './account/entities/account.entity';
     username:"root",
     password:"root",
     database:"finance",
-    entities: [Account],
+    entities: [Account, Invoice],
     synchronize:true,
-  }), AccountModule],
+  }), AccountModule, InvoiceModule],
   controllers: [AppController],
   providers: [AppService],
 })
